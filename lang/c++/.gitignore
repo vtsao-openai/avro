@@ -8,3 +8,6 @@ test9.df
 test_skip.df
 test_lastSync.df
 test_readRecordUsingLastSync.df
+
+bazel-*
+MODULE.bazel.lock

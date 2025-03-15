@@ -1,0 +1,48 @@
+load("@rules_cc//cc:defs.bzl", "cc_library")
+load("//:gen_test_targets.bzl", "gen_test_targets")
+
+cc_library(
+    name = "avro_cpp",
+    srcs = glob([
+        "impl/**/*.cc",
+        "impl/**/*.hh",
+    ]),
+    hdrs = glob(["include/**/*.hh"]),
+    includes = [
+        "include",
+        "include/avro",
+    ],
+    local_defines = select({
+        "@platforms//os:windows": [
+            "NOMINMAX",
+            "BOOST_REGEX_DYN_LINK",
+            "BOOST_FILESYSTEM_DYN_LINK",
+            "BOOST_SYSTEM_DYN_LINK",
+            "BOOST_IOSTREAMS_DYN_LINK",
+            "BOOST_PROGRAM_OPTIONS_DYN_LINK",
+            "BOOST_ALL_NO_LIB",
+        ],
+        "//conditions:default": [],
+    }),
+    visibility = ["//visibility:public"],
+    deps = [
+        "@boost.algorithm",
+        "@boost.crc",
+        "@boost.filesystem",
+        "@boost.iostreams",
+        "@boost.math",
+        "@boost.program_options",
+        "@boost.regex",
+        "@boost.system",
+        "@fmt",
+    ],
+)
+
+# TODO: avrogencpp the jsonschema files.
+
+gen_test_targets(
+    name = "gen_avro_cpp_test_targets",
+    cc_srcs = glob(
+        ["test/*.cc"],
+    ),
+)
