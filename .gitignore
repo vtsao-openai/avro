@@ -30,3 +30,6 @@ composer.lock
 .phpunit.result.cache
 .mvn/jvm.config # Maven JVM settings
 **/*.run.xml    # Intellij IDEA Run configurations
+
+gen_patches.sh
+patches/
