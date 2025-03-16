@@ -11,3 +11,5 @@ test_readRecordUsingLastSync.df
 
 bazel-*
 MODULE.bazel.lock
+gen_patches.sh
+patches/
