@@ -16,18 +16,6 @@ cc_library(
         "include",
         "include/avro",
     ],
-    local_defines = select({
-        "@platforms//os:windows": [
-            "NOMINMAX",
-            "BOOST_REGEX_DYN_LINK",
-            "BOOST_FILESYSTEM_DYN_LINK",
-            "BOOST_SYSTEM_DYN_LINK",
-            "BOOST_IOSTREAMS_DYN_LINK",
-            "BOOST_PROGRAM_OPTIONS_DYN_LINK",
-            "BOOST_ALL_NO_LIB",
-        ],
-        "//conditions:default": [],
-    }),
     visibility = ["//visibility:public"],
     deps = [
         "@boost.algorithm",
@@ -66,7 +54,10 @@ gen_test_targets(
             "test/AvrogencppTests.cc",
             "test/testgentest.cc",
             # This test passes but fails with a pointer error.
+            "test/CommonsSchemasTests.cc",
+            "test/CompilerTests.cc",
             "test/JsonTests.cc",
+            "test/SpecificTests.cc",
             # These look like binaries rather than unit tests as they require
             # reading from stdin.
             "test/precompile.cc",
